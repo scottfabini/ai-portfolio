@@ -1,1 +1,13 @@
- 
+version: 1
+frontend:
+  phases:
+    build:
+      commands:
+        - ./docker-build.sh
+  artifacts:
+    baseDirectory: frontend/.next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/* 
