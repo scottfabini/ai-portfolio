@@ -3,8 +3,8 @@ frontend:
   phases:
     preBuild:
       commands:
-        - cd /codebuild/output/src
-        - cd frontend
+        - echo "Current directory: $(pwd)"
+        - cd ../frontend
         - npm ci
     build:
       commands:
