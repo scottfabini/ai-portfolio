@@ -19,7 +19,7 @@ const education: Education[] = [
     field: 'Computer Science',
     startDate: '2014',
     endDate: '2017',
-    description: 'Focused on software engineering fundamentals including functional programming and design patterns, full-stack web development, and machine learning.',
+    description: 'Focused on software engineering fundamentals including enterprise design patterns, full-stack web development, functional programming, and machine learning via project-focused coursework.',
   },
   {
     school: 'Purdue University',
@@ -27,9 +27,8 @@ const education: Education[] = [
     field: 'Electrical Engineering',
     startDate: '1995',
     endDate: '2000',
-    description: 'Focused on hardware engineering fundamentals including VLSI FPGA programming, microprocessor design, and digital logic design.'
-  },
-  // Add more education entries as needed
+    description: 'Focused on hardware engineering fundamentals including C coding, VLSI FPGA programming, microprocessor design, digital logic design, and analog filter design.'
+  }
 ]
 
 const Education = () => {

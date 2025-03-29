@@ -3,47 +3,74 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
+interface Position {
+  title: string
+  description: string
+}
+
 interface Experience {
   company: string
-  position: string
+  positions: Position[]
   startDate: string
   endDate: string
-  description: string
   technologies: string[]
 }
 
 const experience: Experience[] = [
   {
     company: 'Adobe / Marketo',
-    position: 'Senior Software Engineer',
+    positions: [{
+      title: 'Senior Software Engineer - Customer Engineering Team',
+      description: `• Break-down our two largest customers' performance bottlenecks and pain points, enabling scalability to 100M+ leads and billions of activities per year over 8 years
+• Co-architect on platform data-streams project, enabling customers to leverage their data to build automation at scale 
+•  Product Management and Architecture background to drive roadmap and strategy to meet enterprise customer needs`
+    }],
     startDate: '2017',
     endDate: 'Present',
-    description: 'Developed and maintained the Marketo product, a marketing automation platform. Worked on the core product and the REST API.',
-    technologies: ['Java', 'Spring Boot', 'Performance Optimization'],
+    technologies: ['Performance', 'MySQL', 'Splunk', 'New Relic', 'Java', 'Kafka', 'Solr'],
   },
   {
     company: 'Portland State University',
-    position: 'Facilitator - Object Oriented / Data Structures Lab',
+    positions: [
+      {
+        title: 'Grader - CS551 Numerical Methods',
+        description: 'Graded graduate level math-heavy course assignments for ~10 students per class, solving Taylor Series and other interpolation and approximation problems.'
+      },
+      {
+        title: 'Facilitator - CS202 Object Oriented / Data Structures Lab',
+        description: 'Demonstrated introductory object oriented concepts and data structures for ~30 students per class in weekly whiteboard sessions.'
+      },
+    ],
     startDate: '2015',
     endDate: '2016',
-    description: 'Demonstrated introductory object oriented concepts and data structures for ~30 students per class in weekly whiteboard sessions.',
-    technologies: ['Java', 'Object Oriented Programming'],
+    technologies: ['Java', 'OOP'],
   },
   {
     company: 'Radisys',
-    position: 'Systems Architect / Product Line Manager',
+    positions: [{
+      title: 'Product Line Manager / Systems Architect',
+      description: `• Developed business case justifying the project and presented to executive management for project approval
+• Defined hardware architecture and software requirements
+• Drove the project schedule, ensuring engineering team met deliverables
+• Engaged in face-to-face meetings with customers to drive sales
+• Product annual revenues ranged from $3M-$15M`
+    }],
     startDate: '2010',
     endDate: '2014',
-    description: 'Developed business case justifying the project and presented to executive management for project approval. Defined hardware architecture and software requirements. Drove the project schedule, ensuring engineering team met deliverables. Engaged in face-to-face meetings with customers to drive sales. Product annual revenues ranged from $3M-$15M.',
-    technologies: ['COM-Express', 'Intel', 'PowerPC'],
+    technologies: ['COM-Express', 'Intel', 'PowerPC', '2U Server'],
   },
   {
     company: 'Motorola',
-    position: 'Systems Architect / Hardware Engineer',
+    positions: [{
+      title: 'Systems Architect / Hardware Engineer',
+      description: `• Defined hardware architecture for CompactPCI and AdvancedTCA high-availability (5-nines) telecom systems
+• Designed Backplanes, I/O Transition Modules, and an IPMI Management Controller featuring a 150k gate FPGA
+• Led system integration and testing for high-availability telecom platforms
+• Collaborated with cross-functional teams to deliver enterprise-grade solutions`
+    }],
     startDate: '2000',
     endDate: '2010',
-    description: 'Defined hardware architecture for CompactPCI and AdvancedTCA high-availability (5-nines) telecom systems. Designed Backplanes, I/O Transition Modules, and an IPMI Management Controller featuring a 150k gate FPGA.',
-    technologies: ['5 Nines Availability', 'IPMI', 'Telecom Backplane'],
+    technologies: ['5 Nines', 'IPMI', 'Telecom Backplane'],
   },
 ]
 
@@ -81,19 +108,36 @@ const Experience = () => {
               <div className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-sm">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    {exp.company}
+                    {exp.company === 'Adobe / Marketo' ? (
+                      <span>
+                        <span className="text-[rgb(261,51,32)]">Adobe</span> / <span className="text-[rgb(147,51,234)]">Marketo</span>
+                      </span>
+                    ) : (
+                      exp.company
+                    )}
                   </h3>
                   <span className="text-sm text-gray-500 dark:text-gray-400">
                     {exp.startDate} - {exp.endDate}
                   </span>
                 </div>
-                <h4 className="text-lg font-medium text-primary-600 mb-2">
-                  {exp.position}
-                </h4>
-                <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  {exp.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
+                <div className="space-y-4">
+                  {exp.positions.map((pos, i) => (
+                    <div key={i} className="space-y-2">
+                      <div className="text-lg font-medium text-primary-600">
+                        {pos.title}
+                      </div>
+                      <div className="text-gray-600 dark:text-gray-300">
+                        {pos.description.split('\n').map((bullet, j) => (
+                          <p key={j} className="flex items-start">
+                            <span className="text-primary-600 mr-2">•</span>
+                            {bullet.replace('•', '').trim()}
+                          </p>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-2 mt-4">
                   {exp.technologies.map((tech) => (
                     <span
                       key={tech}

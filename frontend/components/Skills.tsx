@@ -3,31 +3,35 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 
-interface SkillCategory {
-  name: string
-  skills: string[]
+interface Skill {
+  category: string
+  items: string[]
 }
 
-const skillCategories: SkillCategory[] = [
+const skills: Skill[] = [
   {
-    name: 'Frontend',
-    skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'JavaScript', 'HTML5', 'CSS3'],
+    category: 'Customer-centric',
+    items: ['Presenting and Listening to Customers', 'Domain Knowledge: Marketing Automation','Product, Project, and Roadmap Management']
   },
   {
-    name: 'Backend',
-    skills: ['Java', 'Spring Boot', 'Python', 'Node.js', 'Express', 'REST APIs', 'GraphQL'],
+    category: 'SRE Observability - finding and fixing bottlenecks',
+    items: ['Splunk', 'Vivid Cortex', 'AWS Performance Insights for RDS', 'Grafana', 'Prometheus', 'New Relic', 'Wavefront', 'Datadog']
   },
   {
-    name: 'Database',
-    skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'H2', 'SQL'],
+    category: 'Performance Benchmarking & Unit Testing',
+    items: ['Taurus', 'Selenium', 'Sysbench', 'JUnit', 'Jest']
   },
   {
-    name: 'DevOps & Cloud',
-    skills: ['Docker', 'Kubernetes', 'AWS', 'Google Cloud', 'CI/CD', 'Git', 'Jenkins'],
+    category: 'Backend',
+    items: ['Java', 'Spring Boot', 'Controller-Service-Repository Pattern', 'Node.js']
   },
   {
-    name: 'Tools & Others',
-    skills: ['VS Code', 'IntelliJ', 'Postman', 'JUnit', 'Maven', 'Gradle', 'Linux'],
+    category: 'Datastores & Streaming',
+    items: ['MySQL', 'PostgreSQL', 'Kafka', 'MongoDB', 'Redis', 'Solr']
+  },
+  {
+    category: 'Frontend',
+    items: ['JavaScript', 'TypeScript', 'React', 'Redux', 'Next.js', 'Tailwind CSS']
   },
 ]
 
@@ -46,30 +50,30 @@ const Skills = () => {
             Skills
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            My technical expertise and tools I work with
+            Technologies and tools I work with
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {skills.map((skill, index) => (
             <motion.div
-              key={category.name}
+              key={skill.category}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white dark:bg-gray-700 rounded-lg p-6 shadow-sm"
+              className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
-              <h3 className="text-xl font-semibold text-primary-600 mb-4">
-                {category.name}
+              <h3 className="text-xl font-semibold text-primary-600 dark:text-primary-400 mb-4 pb-2 border-b border-gray-200 dark:border-gray-700">
+                {skill.category}
               </h3>
               <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
+                {skill.items.map((item) => (
                   <span
-                    key={skill}
-                    className="px-3 py-1 bg-primary-100 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 rounded-full text-sm"
+                    key={item}
+                    className="px-3 py-1.5 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium hover:bg-primary-100 dark:hover:bg-primary-900/30 transition-colors duration-200"
                   >
-                    {skill}
+                    {item}
                   </span>
                 ))}
               </div>
