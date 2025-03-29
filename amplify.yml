@@ -1,26 +1,47 @@
 version: 1
-frontend:
-  phases:
-    preBuild:
-      commands:
-        - cd frontend
-        - npm ci
-    build:
-      commands:
-        - npm run build
-  artifacts:
-    baseDirectory: frontend/out
-    files:
-      - '**/*'
-  cache:
-    paths:
-      - frontend/node_modules/**/*
-  customHeaders:
-    - pattern: '**/*'
-      headers:
-        - key: 'Cache-Control'
-          value: 'public, max-age=0, must-revalidate'
-  redirects:
-    - source: '</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/'
-      target: '/index.html'
-      status: '200' 
+applications:
+  - frontend:
+      root: frontend
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: frontend/out
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - frontend/node_modules/**/*
+      customHeaders:
+        - pattern: '**/*'
+          headers:
+            - key: 'Cache-Control'
+              value: 'public, max-age=0, must-revalidate'
+      redirects:
+        - source: '</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/'
+          target: '/index.html'
+          status: '200'
+  - backend:
+      root: backend
+      phases:
+        preBuild:
+          commands:
+            - mvn clean install -DskipTests
+        build:
+          commands:
+            - mvn package -DskipTests
+      artifacts:
+        files:
+          - target/*.jar
+        discard-paths: no
+      cache:
+        paths:
+          - '**/target/**'
+      customRules:
+        - pattern: /api/*
+          target: /index.html
+          status: 200 
