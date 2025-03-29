@@ -33,11 +33,12 @@ const Hero = () => {
               <span className="text-primary-600">Scott Fabini</span>
             </h1>
             <h2 className="text-3xl md:text-5xl font-semibold text-gray-700 dark:text-gray-300 mb-6">
-              Enterprise Customer 
-              Engineer at <span className="text-[rgb(261,51,32)]">Adobe</span> / <span className="text-[rgb(147,51,234)]">Marketo</span>
+              Enterprise Customer Engineer at
+              <br />
+              <span className="text-[rgb(261,51,32)]">Adobe</span> / <span className="text-[rgb(147,51,234)]">Marketo</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-              Solving our largest customer's scalability problems, driving roadmap and strategy for the product to meet enterprise customer needs.
+              Solving our largest customer's scalability problems, driving roadmap and strategy to meet enterprise customer needs.
             </p>
             <div className="flex flex-col items-center md:items-start gap-6">
               <div className="flex gap-4">
