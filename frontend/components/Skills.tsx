@@ -27,7 +27,7 @@ const skills: Skill[] = [
   },
   {
     category: 'Datastores & Streaming',
-    items: ['MySQL', 'PostgreSQL', 'Kafka', 'MongoDB', 'Redis', 'Solr']
+    items: ['MySQL', 'PostgreSQL', 'Kafka', 'Provider-Consumer Pattern', 'MongoDB', 'Redis', 'Solr']
   },
   {
     category: 'Frontend',
