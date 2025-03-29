@@ -4,7 +4,7 @@
 chmod +x docker-build.sh
 
 # Build and start the containers
-docker-compose up --build -d
+docker compose up --build -d
 
 # Wait for the services to be ready
 echo "Waiting for services to start..."
