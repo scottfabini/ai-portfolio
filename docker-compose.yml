@@ -6,13 +6,13 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8080/api
-    depends_on:
-      - backend
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080/api}
     volumes:
       - ./frontend:/app
       - /app/node_modules
       - /app/.next
+    depends_on:
+      - backend
 
   backend:
     build:

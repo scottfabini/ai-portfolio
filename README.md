@@ -1,6 +1,14 @@
-# Portfolio Website with ToDo App
+# Portfolio AI Project
 
 A modern portfolio website built with Next.js, Spring Boot, and MySQL, featuring a ToDo application as a demonstration of full-stack development skills.
+
+## Repository Structure
+
+This project uses Git submodules to manage the frontend and backend components:
+
+- `portfolio-ai` (this repository): Main project repository with Docker configurations
+- `portfolio-ai-frontend`: Next.js frontend application (submodule)
+- `portfolio-ai-backend`: Spring Boot backend application (submodule)
 
 ## Tech Stack
 
@@ -30,13 +38,20 @@ A modern portfolio website built with Next.js, Spring Boot, and MySQL, featuring
 - Node.js 18+ (for local development)
 - Java 17+ (for local development)
 - Maven (for local development)
+- Git (with support for submodules)
 
 ## Getting Started
 
-1. Clone the repository:
+1. Clone the repository with submodules:
 ```bash
-git clone <repository-url>
+git clone --recurse-submodules https://github.com/scottfabini/portfolio-ai.git
 cd portfolio-ai
+```
+
+If you already cloned the repository without the submodules:
+```bash
+git submodule init
+git submodule update
 ```
 
 2. Make the build script executable:
@@ -55,6 +70,29 @@ chmod +x docker-build.sh
 - MySQL: localhost:3306
 
 ## Development
+
+### Working with Submodules
+
+To update a submodule to the latest changes from its remote repository:
+```bash
+cd frontend  # or backend
+git pull origin main
+cd ..
+git add frontend  # or backend
+git commit -m "Update frontend submodule"
+```
+
+To push changes to a submodule:
+```bash
+cd frontend  # or backend
+git add .
+git commit -m "Your changes"
+git push origin main
+cd ..
+git add frontend  # or backend
+git commit -m "Update frontend submodule reference"
+git push
+```
 
 ### Frontend Development
 
@@ -77,14 +115,12 @@ The backend is a Spring Boot application providing REST APIs for the ToDo applic
 
 ```
 portfolio-ai/
-├── frontend/
+├── frontend/  # Git submodule: portfolio-ai-frontend
 │   ├── app/           # Next.js app router pages
 │   ├── components/    # Reusable React components
-│   ├── config/        # Configuration files
 │   ├── public/        # Static assets
-│   ├── styles/        # Global styles
-│   └── types/         # TypeScript type definitions
-├── backend/
+│   └── styles/        # Global styles
+├── backend/   # Git submodule: portfolio-ai-backend
 │   └── src/
 │       └── main/
 │           ├── java/
@@ -92,23 +128,22 @@ portfolio-ai/
 │           │       ├── controllers/  # REST controllers
 │           │       ├── services/     # Business logic
 │           │       ├── models/       # Entity classes
-│           │       ├── repositories/ # JPA repositories
-│           │       └── config/       # Configuration classes
+│           │       └── repositories/ # JPA repositories
 │           └── resources/            # Application properties
-└── docker-compose.yml
+└── docker-compose.yml  # Main project Docker configuration
 ```
 
 ## Deployment
 
-The application is configured for deployment on AWS Amplify. Deployment instructions will be added in a future update.
+The application is configured for deployment on AWS Amplify. The frontend and backend can be deployed separately:
 
-## Contributing
+### Frontend Deployment
+- Deploy the frontend submodule to AWS Amplify
+- Configure the environment variable `NEXT_PUBLIC_API_URL` to point to your deployed backend
 
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a new Pull Request
+### Backend Deployment
+- Deploy the backend submodule to AWS Elastic Beanstalk or another suitable service
+- Configure the database connection settings in the deployment environment
 
 ## License
 
