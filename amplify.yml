@@ -55,4 +55,9 @@ backend:
   customRules:
     - pattern: /api/*
       target: /index.html
-      status: 200 
+      status: 200
+  # Environment variables for the backend
+  environmentVariables:
+    SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+    SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+    SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD} 
