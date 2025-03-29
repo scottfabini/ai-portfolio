@@ -9,9 +9,14 @@ frontend:
       commands:
         - npm run build
   artifacts:
-    baseDirectory: frontend/.next
+    baseDirectory: frontend/out
     files:
       - '**/*'
   cache:
     paths:
-      - frontend/node_modules/**/* 
+      - frontend/node_modules/**/*
+  customHeaders:
+    - pattern: '**/*'
+      headers:
+        - key: 'Cache-Control'
+          value: 'public, max-age=0, must-revalidate' 
