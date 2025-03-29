@@ -19,4 +19,8 @@ frontend:
     - pattern: '**/*'
       headers:
         - key: 'Cache-Control'
-          value: 'public, max-age=0, must-revalidate' 
+          value: 'public, max-age=0, must-revalidate'
+  redirects:
+    - source: '</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/'
+      target: '/index.html'
+      status: '200' 
