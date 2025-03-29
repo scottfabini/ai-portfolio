@@ -25,6 +25,10 @@ frontend:
     - source: '</^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|ttf|map|json)$)([^.]+$)/'
       target: '/index.html'
       status: '200'
+    - source: '/api/*'
+      target: 'https://${API_DOMAIN}/api/:splat'
+      status: '200'
+      condition: 'Country=US'
   # Environment variables for the frontend
   environmentVariables:
     NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
@@ -55,10 +59,6 @@ backend:
   cache:
     paths:
       - backend/**/target/**
-  customRules:
-    - pattern: /api/*
-      target: /index.html
-      status: 200
   # Environment variables for the backend
   environmentVariables:
     SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
